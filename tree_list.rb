@@ -64,12 +64,3 @@ class TreeList
     [left_total, right_total].max + @root.value
   end
 end
-
-
-tree = TreeList.new
-
-(1..10).each do |number|
-  tree.add(number)
-end
-
-p tree.greatest_sum

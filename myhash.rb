@@ -35,15 +35,3 @@ class MyHash
     key.to_sym.object_id % 100
   end
 end
-
-hash = MyHash.new
-hash.set('key', 'value')
-hash.set('key1', 'value1')
-hash.set('key2', 'value2')
-hash.set('key3', 'value3')
-
-hash.iterate do |value, key|
-  puts "value #{value}"
-  puts "key #{key}"
-end
-
