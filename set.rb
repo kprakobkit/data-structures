@@ -34,6 +34,31 @@ class MySet
   end
 
   def hash_value(value)
-    value.to_sym.object_id % 100
+    value.to_sym.object_id % 1000
+  end
+
+  def union(other_set)
+    new_set = MySet.new
+    iterate { |element| new_set.add(element) }
+    other_set.iterate { |element| new_set.add(element) }
+    new_set
+  end
+
+  def intersection(other_set)
+    new_set = MySet.new
+    iterate { |element| new_set.add(element) if other_set.contains?(element) }
+    new_set
+  end
+
+  def difference(other_set)
+    new_set = MySet.new
+    iterate { |element| new_set.add(element) unless other_set.contains?(element) }
+    new_set
+  end
+
+  def subset?(other_set)
+    subset = false
+    other_set.iterate { |element| subset = contains?(element) }
+    subset
   end
 end
