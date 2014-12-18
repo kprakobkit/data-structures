@@ -36,31 +36,16 @@ class TreeList
     each(node.right, &block) if node.right
   end
 
-  def greatest_sum
-    return unless @root
-    left_nodes = [@root.left]
-    left_total = 0
-    right_nodes = [@root.right]
-    right_total = 0
+  def greatest_sum(node = @root)
+    return 0 if node == nil
+    return node.value if node.left.nil? && node.right.nil?
 
-    unless @root.left.nil?
-      until left_nodes.empty?
-        current_node = left_nodes.shift
-        left_total += current_node.value
-        left_nodes.push(current_node) if current_node.left
-        left_nodes.push(current_node) if current_node.right
-      end
-    end
+    node.value + max(greatest_sum(node.left), greatest_sum(node.right))
+  end
 
-    unless @root.right.nil?
-      until right_nodes.empty?
-        current_node = right_nodes.shift
-        right_total += current_node.value
-        right_nodes.push(current_node.left) if current_node.left
-        right_nodes.push(current_node.right) if current_node.right
-      end
-    end
+  private
 
-    [left_total, right_total].max + @root.value
+  def max(*values)
+    values.max
   end
 end
